@@ -36,7 +36,7 @@ namespace DagBok
 
                 switch (choice)
                 {
-                    case "1":
+                    case "1": //Lade till meny med switch sats för att hantera användarval i dagboksprogrammet
                         AddEntry();
                         break;
                     case "2":
