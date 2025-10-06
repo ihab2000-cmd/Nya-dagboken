@@ -68,7 +68,7 @@ namespace DagBok
 
             if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
             {
-                Console.WriteLine("❌ Ogiltigt datumformat!");
+                Console.WriteLine(" Ogiltigt datumformat!");
                 return;
             }
 
