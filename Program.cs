@@ -54,7 +54,7 @@ namespace DagBok
                     case "6":
                         return;
                     default:
-                        Console.WriteLine("❌ Ogiltigt val. Försök igen.");
+                        Console.WriteLine(" Ogiltigt val. Försök igen.");
                         break;
                 }
 
@@ -78,14 +78,14 @@ namespace DagBok
             var entry = new DiaryEntry { Date = date, Text = text };
             entries.Add(entry);
 
-            Console.WriteLine("✅ Anteckning sparad!");
+            Console.WriteLine(" Anteckning sparad!");
         }
 
         static void ListEntries()
         {
             if (entries.Count == 0)
             {
-                Console.WriteLine("📭 Inga anteckningar.");
+                Console.WriteLine(" Inga anteckningar.");
                 return;
             }
 
@@ -98,12 +98,12 @@ namespace DagBok
 
         static void SearchEntry()
         {
-            Console.Write("Ange datum att söka (ÅÅÅÅ-MM-DD): ");
+            Console.Write("Ange datum att söka (ÅÅÅÅ-MM-DD): "); //Lade till funktioner för att skapa och lista dagboksanteckningar
             string dateInput = Console.ReadLine();
 
             if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
             {
-                Console.WriteLine("❌ Ogiltigt datumformat!");
+                Console.WriteLine(" Ogiltigt datumformat!");
                 return;
             }
 
@@ -112,14 +112,14 @@ namespace DagBok
             {
                 if (entry.Date == date)
                 {
-                    Console.WriteLine($"✅ Hittad: {entry.Date:yyyy-MM-dd} - {entry.Text}");
+                    Console.WriteLine($" Hittad: {entry.Date:yyyy-MM-dd} - {entry.Text}");
                     found = true;
                 }
             }
 
             if (!found)
             {
-                Console.WriteLine("❌ Ingen anteckning för detta datum.");
+                Console.WriteLine(" Ingen anteckning för detta datum.");
             }
         }
 
