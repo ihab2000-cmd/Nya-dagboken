@@ -21,7 +21,7 @@ namespace DagBok
 
         static void Main(string[] args)
         {
-            while (true)
+            while (true)// här skapade jag menyn
             {
                 Console.WriteLine("\n DAGBOK - MENY");
                 Console.WriteLine("1. Skriv ny anteckning");
