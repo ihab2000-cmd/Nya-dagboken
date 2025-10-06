@@ -63,7 +63,7 @@ namespace DagBok
 
         static void AddEntry()
         {
-            Console.Write("Ange datum (ÅÅÅÅ-MM-DD): ");
+            Console.Write("Ange datum (ÅÅÅÅ-MM-DD): "); // //Lade till funktioner för att skapa och lista dagboksanteckningar
             string dateInput = Console.ReadLine();
 
             if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
@@ -98,7 +98,7 @@ namespace DagBok
 
         static void SearchEntry()
         {
-            Console.Write("Ange datum att söka (ÅÅÅÅ-MM-DD): "); //Lade till funktioner för att skapa och lista dagboksanteckningar
+            Console.Write("Ange datum att söka (ÅÅÅÅ-MM-DD): "); 
             string dateInput = Console.ReadLine();
 
             if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
@@ -141,7 +141,7 @@ namespace DagBok
         {
             try
             {
-                if (!File.Exists("diary.json"))
+                if (!File.Exists("diary.json")) // Lade till metod för att spara dagboksanteckningar till JSON fil
                 {
                     Console.WriteLine(" Filen finns inte.");
                     return;
