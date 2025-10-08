@@ -3,12 +3,6 @@ using System.Text.Json;
 
 namespace DagBok
 {
-
-
-
-
-
-
     public class DiaryEntry
     {
         public DateTime Date { get; set; }
@@ -30,6 +24,8 @@ namespace DagBok
                 Console.WriteLine("4. Spara till fil");
                 Console.WriteLine("5. Läs från fil");
                 Console.WriteLine("6. Avsluta");
+                Console.WriteLine("7. Uppdatera anteckning"); // Ny funktion
+                Console.WriteLine("8. Ta bort anteckning");    // Ny funktion
                 Console.Write("Välj: ");
 
                 string choice = Console.ReadLine();
@@ -53,11 +49,16 @@ namespace DagBok
                         break;
                     case "6":
                         return;
+                    case "7":
+                        UpdateEntry(); // Ny funktion
+                        break;
+                    case "8":
+                        DeleteEntry(); // Ny funktion
+                        break;
                     default:
                         Console.WriteLine(" Ogiltigt val. Försök igen.");
                         break;
                 }
-
             }
         }
 
@@ -98,7 +99,7 @@ namespace DagBok
 
         static void SearchEntry()
         {
-            Console.Write("Ange datum att söka (ÅÅÅÅ-MM-DD): "); 
+            Console.Write("Ange datum att söka (ÅÅÅÅ-MM-DD): ");
             string dateInput = Console.ReadLine();
 
             if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
@@ -126,7 +127,7 @@ namespace DagBok
         static void SaveToFile()
         {
             try
-            {  
+            {
                 string json = JsonSerializer.Serialize(entries, new JsonSerializerOptions { WriteIndented = true });
                 File.WriteAllText("diary.json", json);
                 Console.WriteLine(" Anteckningar sparade till fil!");
@@ -166,6 +167,55 @@ namespace DagBok
             }
         }
 
+        
+        static void UpdateEntry()
+        {
+            Console.Write("Ange datum för anteckning att uppdatera (ÅÅÅÅ-MM-DD): ");
+            string dateInput = Console.ReadLine();
 
+            if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            {
+                Console.WriteLine("Ogiltigt datumformat!");
+                return;
+            }
+
+            var entry = entries.FirstOrDefault(e => e.Date == date);
+            if (entry == null)
+            {
+                Console.WriteLine("Ingen anteckning hittad för det datumet.");
+                return;
+            }
+
+            Console.WriteLine($"Nuvarande text: {entry.Text}");
+            Console.Write("Skriv ny text: ");
+            string newText = Console.ReadLine();
+
+            entry.Text = newText;
+            Console.WriteLine("Anteckningen har uppdaterats!");
+        }
+
+        
+        static void DeleteEntry()
+        {
+            Console.Write("Ange datum för anteckning att ta bort (ÅÅÅÅ-MM-DD): ");
+            string dateInput = Console.ReadLine();
+
+            if (!DateTime.TryParseExact(dateInput, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            {
+                Console.WriteLine("Ogiltigt datumformat!");
+                return;
+            }
+
+            var entry = entries.FirstOrDefault(e => e.Date == date);
+            if (entry == null)
+            {
+                Console.WriteLine("Ingen anteckning hittad för det datumet.");
+                return;
+            }
+
+            entries.Remove(entry);
+            Console.WriteLine("Anteckningen har tagits bort!");
+        }
     }
 }
+
